@@ -1,14 +1,16 @@
 <p align="center">
-  <img src="./assets/readme/hero.svg" width="100%" alt="把 GitHub 项目合规放到 Gitee 分享 — 先核许可，再导入 — 当用户给一个 GitHub 仓库链接、想在国内分享时使用：先研究该项目的许可与实际启动方式，再默认走 Gitee 组织镜像导入，成功后返回一句话 Agent 分享指令。">
+  <img src="./assets/readme/hero.svg" width="100%" alt="把 GitHub 项目合规放到码云分享 — 先核许可，再导入 — 当用户给一个 GitHub 仓库链接、想在国内分享时使用：先研究该项目的许可与实际启动方式，再默认走码云组织镜像导入，成功后返回一句不含任何链接的一句话 Agent 分享指令。">
 </p>
 
 # lhg-share-github · GitHub 项目合规分享
 
-当用户给一个 GitHub 仓库链接、想在国内分享时使用：先核许可与署名，再默认走 Gitee 组织镜像导入，验收后交付 Gitee 链接与克隆命令，不走 GitHub 组织、不冒充原创。
+当用户给一个 GitHub 仓库链接、想在国内分享时使用：先核许可与署名，再默认走码云（Gitee）组织镜像导入，验收后交付**无链接坐标**与一句话 Agent 分享指令，不走 GitHub 组织、不冒充原创。
 
 ## 它是什么
 
-- 三件事缺一件都不算完成：合规存到 Gitee 组织（默认 `lls-find-hub`），对外只发 Gitee 链接；存之前先研究项目，知道它到底怎么安装、怎么启动、启动后应该打开什么；成功后返回一句话 Agent 分享指令，对方 Agent 只凭这一句就能下载、安装并打开项目。
+- 三件事缺一件都不算完成：合规存到码云组织（默认 `lls-find-hub`）；存之前先研究项目，知道它到底怎么安装、怎么启动、启动后应该打开什么；成功后返回一句话 Agent 分享指令，对方 Agent 只凭这一句就能找到仓库、下载、安装并打开项目。
+- **分享指令里没有任何链接**：只给「平台＋组织＋仓名」坐标，由接收方 Agent 自己拼出地址。这样过聊天软件、企业 IM、Agent 平台输入框的链接拦截也不会被截断。
+- 寻址阶梯压缩进句子本身：市场搜索 → 坐标克隆 → SSH 兜底 → 站内搜索 → 报告卡点，因为接收方手里还没有这个 Skill，读不到 SKILL.md 里的规则。
 - 研究不清启动方式时改用兜底句，不编一个看起来能跑的命令。
 - 默认不走 GitHub 组织，不把代码复制成新仓冒充原创，不改上游代码，不删 LICENSE。
 
@@ -16,9 +18,10 @@
 
 | 你说 | 它给你 |
 |---|---|
-| 使用 $lhg-share-github，把 https://github.com/Renhuai123/ziwei-doushu 放到 Gitee 分享 | 核许可 → Gitee 组织导入 → 交付 Gitee 链接与一句话分享指令 |
+| 使用 $lhg-share-github，把 https://github.com/Renhuai123/ziwei-doushu 放到码云分享 | 核许可 → 组织镜像导入 → 交付无链接坐标与一句话分享指令 |
 | 这个 GitHub 项目怎么分享给国内用户 | 先核实许可、版权人、数据集许可、非商用部分，拆开写，不混成一句可商用 |
-| 对方 Agent 只凭一句话能装好吗 | 验收通过才交付：按一句话指令下载、安装并打开成功 |
+| 对方 Agent 只凭一句话能装好吗 | 验收通过才交付：按一句话指令寻址、下载、安装并打开成功 |
+| 链接老是被聊天软件拦掉怎么办 | 分享指令里不放链接，只放坐标，让对方 Agent 自己拼地址 |
 
 ## 安装
 
@@ -29,7 +32,7 @@ npx -y skills add lhg-skills/lhg-share-github -g --all
 <details>
 <summary>发给 Agent 的安装话术（推荐：小白用户直接复制整段发给你的 Agent）</summary>
 
-> 请帮我安装 Skill「lhg-share-github」：先从 Gitee 上 lhg-skills 组织下的 lhg-share-github 仓库下载；如果 Gitee 无法访问或下载失败，改从 GitHub 上 lhg-skills 组织下的同名仓库下载。按当前 Agent 的规范安装其中的 Skill，优先全局安装，保留完整目录和依赖。请直接执行，完成后验证是否安装成功，告诉我实际使用的来源、安装的版本号以及如何调用；遇到访问或安装限制请说明具体原因。需要输入管理员密码或确认风险时停下来等我。
+> 请帮我安装 Skill「lhg-share-github」：先看你这边有没有自带的 Skill 市场或搜索，有就直接搜这个名字装上；没有就去国内的码云这个开源代码托管平台上，找组织 lls-find-hub 下的公开仓库 lhg-share-github（具体地址你自己按平台规则拼出来，别问我要），克隆下来后整个仓库根目录就是一个 Skill，把它整个放进你的全局 Skill 目录，确认能读到 SKILL.md 且 name 是 lhg-share-github、版本是 2.0.0 就算装好；要是访问不通，先换 SSH 方式再试，还不行就在平台站内搜组织名加仓名，都不行就停下来告诉我卡在哪一步，不要编一个地址糊弄我。
 
 **怎么算装好了**：Agent 能在已安装的 Skill 里看到 `lhg-share-github`，并报出版本号（与仓库 `SKILL.md` 的 `version` 一致）。只是打开了仓库网页不算安装。
 
@@ -39,10 +42,10 @@ npx -y skills add lhg-skills/lhg-share-github -g --all
 ## 它怎么做
 
 1. 核实上游许可、版权人、数据集许可、非商用部分（拆开写）
-2. 浏览器登录 Gitee，确认组织存在、账号是成员且有建仓权限（组织不存在且用户没有说先创建时先停下问）
+2. 浏览器登录码云，确认组织存在、账号是成员且有建仓权限（组织不存在且用户没有说先创建时先停下问）
 3. 从组织页新建开源仓，用「从 URL 导入」填入 GitHub 地址导入
 4. 按模板改描述（镜像收藏、原作者、许可、不改代码、不声称原创）
-5. 验收后交付 Gitee 链接与一句话分享指令
+5. 验收后交付**无链接坐标**与一句话分享指令
 
 ## 什么时候用 / 不用
 
@@ -51,6 +54,7 @@ npx -y skills add lhg-skills/lhg-share-github -g --all
 - 给国内用户分享 GitHub 公开项目
 - 对方打不开 GitHub、不用 VPN 也要能拿到
 - 要合规镜像，不冒充原创
+- 分享通道会拦 HTTP 链接（聊天软件、企业 IM、Agent 平台输入框）
 
 **别用它，当你：**
 
@@ -62,14 +66,21 @@ npx -y skills add lhg-skills/lhg-share-github -g --all
 
 ```
 README.md
-skills/
-  lhg-share-github/
-    SKILL.md        skill 全文
+SKILL.md                 skill 全文（扁平布局，仓库根即 Skill 目录）
+assets/readme/hero.svg   README 头图
 ```
+
+## 无链接分享指令长什么样
+
+发给对方 Agent 的一句话（模板 B，普通项目）：
+
+> 请去国内的码云这个开源代码托管平台上，找组织 lls-find-hub 下的公开仓库 ziwei-doushu（具体地址你自己按平台规则拼出来，别问我要），克隆紫微斗数开源排盘引擎，不要用 GitHub 原地址，进入 ziwei-doushu 目录后依次执行 npm ci 和 npm run dev 完成安装并启动，然后在浏览器打开本机 3000 端口的 chart 页面让我看到排盘演示，遇到问题先做冒烟测试定位原因，直到把问题解决、能正常启动进入项目为止。
+
+整句没有协议头、没有域名、没有 `.git`、没有 `@`，也没有 ASCII 的 gitee 字样；但「平台＋组织＋仓名」三要素齐全，接收方 Agent 自己就能拼出地址。
 
 ## 自检与反馈
 
-本仓库没有脚本冒烟测试；自检方法是按 SKILL.md 走一遍：许可拆开写清、组织与权限先确认、导入后验收（能按一句话指令下载、安装并打开）再交付。
+本仓库没有脚本冒烟测试；自检方法是按 SKILL.md 走一遍：许可拆开写清、组织与权限先确认、导入后验收（能按一句话指令寻址、下载、安装并打开）再交付。
 
 发现问题请提 issue：[提一个 issue](https://github.com/lhg-skills/lhg-share-github/issues/new)（标题以 `[QC] ` 开头，写清你让它做了什么、它实际给了什么）。
 
